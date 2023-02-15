@@ -28,16 +28,21 @@ function updatePhoneTotalPrice(newPhoneNumber) {
    PhoneTotalElement.innerText = PhoneTotalPrice;
 }
 
+
+
 //console.log('ggs')
 document.getElementById('button-phone-plus').addEventListener('click', function(){
    const newPhoneNumber = UpdatePhoneNumber(true);
    updatePhoneTotalPrice(newPhoneNumber);
    //console.log(caseTotalPrice);
     //console.log(newCaseNumber);
+    calculateSubTotal();
+
 })
 
 document.getElementById('button-phone-minus').addEventListener('click', function(){
     const newPhoneNumber = UpdatePhoneNumber(false);
     updatePhoneTotalPrice(newPhoneNumber);
    //console.log(caseTotalPrice);
+   calculateSubTotal();
 })
