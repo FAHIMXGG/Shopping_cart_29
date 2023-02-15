@@ -47,7 +47,49 @@ document.getElementById('calculator').addEventListener('click', function(){
     console.log()
 })
 
-document.getElementById('verify-pin').addEventListener('click', function () {
+// document.getElementById('verify-pin').addEventListener('click', function () {
+//     const displayPinField = document.getElementById('display-pin');
+//     const currentPin = displayPinField.value;
+
+//     const typedNumberField = document.getElementById('typed-numbers');
+//     const typedNumber = typedNumberField.value;
+
+//     const pinSuccessMessage = document.getElementById('pin-success');
+//     const pinWrongMessage = document.getElementById('pin-wrong');
+
+//     if(typedNumber === ''){
+//         pinWrongMessage.style.display = 'block';
+//         pinSuccessMessage.style.display = 'none';
+//         setTimeout(function() {
+//             pinWrongMessage.style.display = 'none';
+//           }, 3000);
+//     }
+
+//     else if(typedNumber === currentPin){
+        
+//         pinSuccessMessage.style.display = 'block';
+//         pinWrongMessage.style.display = 'none';
+//         setTimeout(function() {
+//             pinSuccessMessage.style.display = 'none';
+//           }, 3000);
+//     }
+//     else{
+        
+//         pinWrongMessage.style.display = 'block';
+//         pinSuccessMessage.style.display = 'none';
+//         setTimeout(function() {
+//             pinWrongMessage.style.display = 'none';
+//           }, 3000);
+//     }
+
+// })
+
+
+let wrongAttempts = 0;
+
+
+const verifyButton = document.getElementById('verify-pin');
+verifyButton.addEventListener('click', function () {
     const displayPinField = document.getElementById('display-pin');
     const currentPin = displayPinField.value;
 
@@ -57,16 +99,34 @@ document.getElementById('verify-pin').addEventListener('click', function () {
     const pinSuccessMessage = document.getElementById('pin-success');
     const pinWrongMessage = document.getElementById('pin-wrong');
 
-    if(typedNumber === currentPin){
-        
-        pinSuccessMessage.style.display = 'block';
-        pinWrongMessage.style.display = 'none';
-    }
-    else{
-        
+
+
+    if (typedNumber === '') {
         pinWrongMessage.style.display = 'block';
         pinSuccessMessage.style.display = 'none';
-
+        setTimeout(function() {
+            pinWrongMessage.style.display = 'none';
+        }, 3000);
+        wrongAttempts++;
+    } else if (typedNumber === currentPin) {
+        pinSuccessMessage.style.display = 'block';
+        pinWrongMessage.style.display = 'none';
+        setTimeout(function() {
+            pinSuccessMessage.style.display = 'none';
+        }, 3000);
+    } else {
+        pinWrongMessage.style.display = 'block';
+        pinSuccessMessage.style.display = 'none';
+        setTimeout(function() {
+            pinWrongMessage.style.display = 'none';
+        }, 3000);
+        wrongAttempts++;
     }
 
-})
+    if (wrongAttempts >= 3) {
+        verifyButton.disabled = true;
+    }
+    
+    const count = document.getElementById('count');
+    count.innerText = 3 - wrongAttempts;
+});
